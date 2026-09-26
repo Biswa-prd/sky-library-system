@@ -323,7 +323,7 @@ class Repository<T extends { id: string }> {
     const items = await this.findMany({ where: args.where });
     let sum = 0;
     if (args._sum && args._sum.amount) {
-      sum = items.reduce((acc, item) => acc + (Number(item.amount) || 0), 0);
+      sum = items.reduce((acc: number, item: any) => acc + (Number(item.amount) || 0), 0);
     }
     return { _sum: { amount: sum } };
   }

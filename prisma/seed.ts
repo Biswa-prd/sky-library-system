@@ -1,7 +1,17 @@
 import { PrismaClient } from '@prisma/client';
-import bcrypt from 'bcryptjs';
+import crypto from 'crypto';
 
 const prisma = new PrismaClient();
+
+async function hashPassword(password: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const salt = 'static_seed_salt_123';
+    crypto.pbkdf2(password, salt, 1000, 64, 'sha512', (err, derivedKey) => {
+      if (err) reject(err);
+      resolve(`${salt}:${derivedKey.toString('hex')}`);
+    });
+  });
+}
 
 async function main() {
   console.log('🌱 Starting Library Management System database seed...');
@@ -35,7 +45,7 @@ async function main() {
     ],
   });
 
-  const defaultPasswordHash = await bcrypt.hash('Password123!', 10);
+  const defaultPasswordHash = await hashPassword('Password123!');
 
   // 3. Create Admin User
   const adminUser = await prisma.user.create({
