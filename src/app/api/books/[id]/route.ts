@@ -3,8 +3,9 @@ import { authenticateRequest, authorizeRoles } from '@/lib/auth';
 import { getBookById, updateBook, deleteBook } from '@/services/book.service';
 import { bookSchema } from '@/validations/book.schema';
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, props: { params: Promise<{ id: string }> }) {
   try {
+    const params = await props.params;
     const book = await getBookById(params.id);
     if (!book) {
       return NextResponse.json({ error: 'Book not found' }, { status: 404 });
@@ -15,8 +16,9 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
   }
 }
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, props: { params: Promise<{ id: string }> }) {
   try {
+    const params = await props.params;
     const session = await authenticateRequest(req);
     if (!session || !authorizeRoles(session, ['ADMIN', 'LIBRARIAN'])) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
@@ -35,8 +37,9 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, props: { params: Promise<{ id: string }> }) {
   try {
+    const params = await props.params;
     const session = await authenticateRequest(req);
     if (!session || !authorizeRoles(session, ['ADMIN', 'LIBRARIAN'])) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });

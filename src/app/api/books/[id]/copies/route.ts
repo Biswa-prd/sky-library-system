@@ -3,8 +3,9 @@ import { authenticateRequest, authorizeRoles } from '@/lib/auth';
 import { addBookCopy } from '@/services/book.service';
 import { bookCopySchema } from '@/validations/book.schema';
 
-export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(req: NextRequest, props: { params: Promise<{ id: string }> }) {
   try {
+    const params = await props.params;
     const session = await authenticateRequest(req);
     if (!session || !authorizeRoles(session, ['ADMIN', 'LIBRARIAN'])) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });

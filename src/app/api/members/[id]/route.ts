@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import { authenticateRequest, authorizeRoles } from '@/lib/auth';
 import { getMemberById, updateMemberStatus } from '@/services/member.service';
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, props: { params: Promise<{ id: string }> }) {
   try {
+    const params = await props.params;
     const session = await authenticateRequest(req);
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -25,8 +26,9 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
   }
 }
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, props: { params: Promise<{ id: string }> }) {
   try {
+    const params = await props.params;
     const session = await authenticateRequest(req);
     if (!session || !authorizeRoles(session, ['ADMIN', 'LIBRARIAN'])) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
