@@ -117,10 +117,6 @@ span.bg-teal-100, span.dark\:bg-teal-950\/50 {
   font-weight: 800 !important;
   box-shadow: 0 2px 8px rgba(45, 212, 191, 0.15) !important;
 }
-  border: 1.5px solid #38bdf8 !important;
-  font-weight: 800 !important;
-  box-shadow: 0 2px 8px rgba(14, 165, 233, 0.15) !important;
-}
 
 span.bg-amber-100, span.dark\:bg-amber-950\/50 {
   background: #fef3c7 !important;
