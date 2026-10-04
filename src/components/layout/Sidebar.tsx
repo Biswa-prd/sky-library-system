@@ -56,11 +56,40 @@ export const Sidebar: React.FC<SidebarProps> = ({ role }) => {
 
   const navItems = role === 'ADMIN' ? adminNav : role === 'LIBRARIAN' ? librarianNav : memberNav;
 
+  // Pick top 4-5 items for mobile bottom bar
+  const mobileNavItems = navItems.slice(0, 5);
+
   return (
-    <aside className="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shrink-0 hidden md:flex flex-col py-6 px-4">
-      <div className="space-y-1">
-        <p className="px-3 text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Navigation</p>
-        {navItems.map((item) => {
+    <>
+      {/* Desktop Sidebar */}
+      <aside className="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shrink-0 hidden md:flex flex-col py-6 px-4">
+        <div className="space-y-1">
+          <p className="px-3 text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Navigation</p>
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  'flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all',
+                  isActive
+                    ? 'bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 font-semibold shadow-2xs'
+                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
+                )}
+              >
+                <Icon className={cn('w-4 h-4', isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-400')} />
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
+        </div>
+      </aside>
+
+      {/* Mobile Native-Style Bottom Navigation Bar */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-slate-900/95 border-t border-slate-200/80 dark:border-slate-800/80 backdrop-blur-xl px-2 py-1.5 flex items-center justify-around shadow-lg">
+        {mobileNavItems.map((item) => {
           const Icon = item.icon;
           const isActive = pathname === item.href;
           return (
@@ -68,18 +97,20 @@ export const Sidebar: React.FC<SidebarProps> = ({ role }) => {
               key={item.href}
               href={item.href}
               className={cn(
-                'flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all',
+                'flex flex-col items-center justify-center py-1 px-2.5 rounded-xl transition-all min-w-[56px]',
                 isActive
-                  ? 'bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 font-semibold'
-                  : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
+                  ? 'text-teal-600 dark:text-teal-400 font-bold scale-105'
+                  : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
               )}
             >
-              <Icon className={cn('w-4 h-4', isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-slate-400')} />
-              <span>{item.label}</span>
+              <Icon className={cn('w-5 h-5 mb-0.5', isActive ? 'text-teal-600 dark:text-teal-400' : 'text-slate-400')} />
+              <span className="text-[10px] font-medium leading-none truncate max-w-[64px]">
+                {item.label.split(' ')[0]}
+              </span>
             </Link>
           );
         })}
-      </div>
-    </aside>
+      </nav>
+    </>
   );
 };
