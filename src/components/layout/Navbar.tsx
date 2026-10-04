@@ -22,6 +22,8 @@ import { UserSession } from '@/types';
 import { Badge } from '../ui/Badge';
 import { cn } from '@/lib/utils';
 
+import { useSidebar } from '@/components/layout/SidebarContext';
+
 interface NavbarProps {
   user: UserSession | null;
 }
@@ -29,10 +31,10 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ user }) => {
   const router = useRouter();
   const pathname = usePathname();
+  const { isMobileOpen, toggleMobile } = useSidebar();
   const [unreadCount, setUnreadCount] = useState(0);
   const [notifications, setNotifications] = useState<any[]>([]);
   const [isOpen, setIsOpen] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const loadNotifications = () => {
@@ -75,54 +77,17 @@ export const Navbar: React.FC<NavbarProps> = ({ user }) => {
     return name.slice(0, 2).toUpperCase();
   };
 
-  const adminNav = [
-    { label: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
-    { label: 'User Management', href: '/admin/users', icon: UserCheck },
-    { label: 'Members', href: '/admin/members', icon: Users },
-    { label: 'Book Catalog', href: '/admin/books', icon: BookOpen },
-    { label: 'Circulation Loans', href: '/admin/loans', icon: ArrowRightLeft },
-    { label: 'Fines & Payments', href: '/admin/fines', icon: Receipt },
-    { label: 'System Reports', href: '/admin/reports', icon: FileBarChart },
-    { label: 'Audit Logs', href: '/admin/audit-logs', icon: History },
-    { label: 'Policy Settings', href: '/admin/settings', icon: Settings },
-  ];
-
-  const librarianNav = [
-    { label: 'Dashboard', href: '/librarian/dashboard', icon: LayoutDashboard },
-    { label: 'Members', href: '/librarian/members', icon: Users },
-    { label: 'Book Catalog', href: '/librarian/books', icon: BookOpen },
-    { label: 'Circulation Loans', href: '/librarian/loans', icon: ArrowRightLeft },
-    { label: 'Fines Management', href: '/librarian/fines', icon: Receipt },
-    { label: 'Reports', href: '/librarian/reports', icon: FileBarChart },
-  ];
-
-  const memberNav = [
-    { label: 'Dashboard', href: '/member/dashboard', icon: LayoutDashboard },
-    { label: 'Browse Catalog', href: '/member/books', icon: BookOpen },
-    { label: 'My Loans', href: '/member/loans', icon: ArrowRightLeft },
-    { label: 'My Fines', href: '/member/fines', icon: Receipt },
-    { label: 'Notifications', href: '/member/notifications', icon: Bell },
-  ];
-
-  const navItems = user
-    ? user.role === 'ADMIN'
-      ? adminNav
-      : user.role === 'LIBRARIAN'
-      ? librarianNav
-      : memberNav
-    : [];
-
   return (
     <header className="h-16 border-b border-slate-200/70 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl sticky top-0 z-40 px-3 sm:px-6 flex items-center justify-between shadow-xs">
       <div className="flex items-center space-x-2 sm:space-x-3">
         {/* Mobile Drawer Hamburger Button */}
         {user && (
           <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={toggleMobile}
             className="md:hidden p-2 text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         )}
 
@@ -255,71 +220,6 @@ export const Navbar: React.FC<NavbarProps> = ({ user }) => {
             </button>
           </div>
         </div>
-      )}
-
-      {/* Mobile Slide-Over Sidebar Drawer Navigation */}
-      {mobileMenuOpen && (
-        <>
-          <div
-            className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 md:hidden transition-opacity"
-            onClick={() => setMobileMenuOpen(false)}
-          />
-          <aside className="fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shrink-0 flex flex-col py-6 px-4 shadow-2xl overflow-y-auto md:hidden transition-transform duration-300">
-            <div className="flex items-center justify-between pb-4 mb-3 border-b border-slate-100 dark:border-slate-800">
-              <div className="flex items-center space-x-2.5">
-                <div className="p-1.5 bg-gradient-to-tr from-teal-600 to-emerald-500 text-white rounded-xl shadow-xs">
-                  <BookOpen className="w-4 h-4 text-white" />
-                </div>
-                <span className="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">
-                  Sky Library
-                </span>
-              </div>
-              <button
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                aria-label="Close menu"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="space-y-1 flex-1">
-              <p className="px-3 text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Navigation</p>
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                const isActive = pathname === item.href;
-                return (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={cn(
-                      'flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all',
-                      isActive
-                        ? 'bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-400 font-semibold'
-                        : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
-                    )}
-                  >
-                    <Icon className={cn('w-4 h-4', isActive ? 'text-teal-600 dark:text-teal-400' : 'text-slate-400')} />
-                    <span>{item.label}</span>
-                  </Link>
-                );
-              })}
-            </div>
-
-            {user && (
-              <div className="pt-4 mt-6 border-t border-slate-100 dark:border-slate-800">
-                <button
-                  onClick={handleLogout}
-                  className="w-full flex items-center justify-center space-x-2 px-4 py-2.5 text-xs font-bold text-rose-600 bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/50 rounded-xl transition-all"
-                >
-                  <LogOut className="w-4 h-4" />
-                  <span>Logout</span>
-                </button>
-              </div>
-            )}
-          </aside>
-        </>
       )}
     </header>
   );

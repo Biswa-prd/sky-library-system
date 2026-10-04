@@ -18,12 +18,15 @@ import {
 import { Role } from '@/types';
 import { cn } from '@/lib/utils';
 
+import { useSidebar } from '@/components/layout/SidebarContext';
+
 interface SidebarProps {
   role: Role;
 }
 
 export const Sidebar: React.FC<SidebarProps> = ({ role }) => {
   const pathname = usePathname();
+  const { isMobileOpen, closeMobile } = useSidebar();
 
   const adminNav = [
     { label: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
@@ -57,29 +60,35 @@ export const Sidebar: React.FC<SidebarProps> = ({ role }) => {
   const navItems = role === 'ADMIN' ? adminNav : role === 'LIBRARIAN' ? librarianNav : memberNav;
 
   return (
-    <aside className="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shrink-0 hidden md:flex flex-col py-6 px-4">
-      <div className="space-y-1">
-        <p className="px-3 text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Navigation</p>
-        {navItems.map((item) => {
-          const Icon = item.icon;
-          const isActive = pathname === item.href;
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                'flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all',
-                isActive
-                  ? 'bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-400 font-semibold'
-                  : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
-              )}
-            >
-              <Icon className={cn('w-4 h-4', isActive ? 'text-teal-600 dark:text-teal-400' : 'text-slate-400')} />
-              <span>{item.label}</span>
-            </Link>
-          );
-        })}
-      </div>
-    </aside>
+    <aside
+      className={cn(
+        'w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 shrink-0 flex-col py-6 px-4',
+        isMobileOpen ? 'flex' : 'hidden md:flex'
+      )}
+    >
+        <div className="space-y-1">
+          <p className="px-3 text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">Navigation</p>
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={closeMobile}
+                className={cn(
+                  'flex items-center space-x-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all',
+                  isActive
+                    ? 'bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-400 font-semibold'
+                    : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
+                )}
+              >
+                <Icon className={cn('w-4 h-4', isActive ? 'text-teal-600 dark:text-teal-400' : 'text-slate-400')} />
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
+        </div>
+      </aside>
   );
 };
