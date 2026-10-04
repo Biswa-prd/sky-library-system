@@ -31,10 +31,10 @@ export default function LibrarianDashboardPage() {
       <Navbar user={session} />
       <div className="flex flex-1">
         <Sidebar role="LIBRARIAN" />
-        <main className="flex-1 p-6 space-y-6 max-w-7xl mx-auto w-full">
+        <main className="flex-1 p-4 sm:p-6 space-y-6 max-w-7xl mx-auto w-full overflow-x-hidden">
           <div>
-            <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white">Librarian Desk</h1>
-            <p className="text-sm text-slate-500">Manage daily circulation operations, book copies, and member requests.</p>
+            <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">Librarian Desk</h1>
+            <p className="text-xs sm:text-sm text-slate-500">Manage daily circulation operations, book copies, and member requests.</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

@@ -20,7 +20,7 @@ export const Card: React.FC<CardProps> = ({ title, subtitle, icon, action, class
       {(title || icon || action) && (
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-3">
-            {icon && <div className="p-2.5 bg-indigo-50 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400 rounded-lg">{icon}</div>}
+            {icon && <div className="p-2.5 bg-teal-50 dark:bg-teal-950/50 text-teal-600 dark:text-teal-400 rounded-xl">{icon}</div>}
             <div>
               {title && <h3 className="text-base font-semibold text-slate-900 dark:text-white">{title}</h3>}
               {subtitle && <p className="text-xs text-slate-500 dark:text-slate-400">{subtitle}</p>}

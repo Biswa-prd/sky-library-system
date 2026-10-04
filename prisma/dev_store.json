@@ -412,6 +412,36 @@
       "details": "{\"email\":\"admin@library.local\"}",
       "createdAt": "2026-10-04T11:34:30.007Z",
       "updatedAt": "2026-10-04T11:34:30.007Z"
+    },
+    {
+      "id": "aud-1791114571720-qm7z",
+      "userId": "user-stu-1",
+      "action": "USER_LOGIN",
+      "entity": "User",
+      "entityId": "user-stu-1",
+      "details": "{\"email\":\"student@library.local\"}",
+      "createdAt": "2026-10-04T11:49:31.720Z",
+      "updatedAt": "2026-10-04T11:49:31.720Z"
+    },
+    {
+      "id": "aud-1791114919991-reo3",
+      "userId": "user-stu-1",
+      "action": "USER_LOGOUT",
+      "entity": "User",
+      "entityId": "user-stu-1",
+      "details": null,
+      "createdAt": "2026-10-04T11:55:19.991Z",
+      "updatedAt": "2026-10-04T11:55:19.991Z"
+    },
+    {
+      "id": "aud-1791115368828-bsxn",
+      "userId": "user-stu-1",
+      "action": "USER_LOGIN",
+      "entity": "User",
+      "entityId": "user-stu-1",
+      "details": "{\"email\":\"student@library.local\"}",
+      "createdAt": "2026-10-04T12:02:48.828Z",
+      "updatedAt": "2026-10-04T12:02:48.829Z"
     }
   ],
   "systemSettings": [

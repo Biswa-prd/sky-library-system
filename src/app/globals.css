@@ -75,29 +75,29 @@ aside a:hover {
   transform: translateX(3px);
 }
 
-aside a.bg-indigo-50, aside a.dark\:bg-indigo-950\/60 {
-  background: linear-gradient(135deg, #0d9488 0%, #0284c7 100%) !important;
+aside a.bg-teal-50, aside a.dark\:bg-teal-950\/60 {
+  background: linear-gradient(135deg, #0d9488 0%, #059669 100%) !important;
   color: #ffffff !important;
   box-shadow: 0 6px 18px rgba(13, 148, 136, 0.35) !important;
   font-weight: 700 !important;
 }
 
-aside a.bg-indigo-50 svg, aside a.dark\:bg-indigo-950\/60 svg {
+aside a.bg-teal-50 svg, aside a.dark\:bg-teal-950\/60 svg {
   color: #ffffff !important;
 }
 
 /* Bright Vibrant Gradient Buttons */
-button.bg-indigo-600, .bg-indigo-600 {
+button.bg-teal-600, .bg-teal-600 {
   background: linear-gradient(135deg, #0d9488 0%, #059669 100%) !important;
   color: #ffffff !important;
   border: none !important;
-  box-shadow: 0 6px 18px rgba(13, 148, 136, 0.3) !important;
+  box-shadow: 0 6px 18px rgba(13, 148, 136, 0.25) !important;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
-button.bg-indigo-600:hover, .bg-indigo-600:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(13, 148, 136, 0.45) !important;
+button.bg-teal-600:hover, .bg-teal-600:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(13, 148, 136, 0.35) !important;
   background: linear-gradient(135deg, #0f766e 0%, #047857 100%) !important;
 }
 
@@ -110,9 +110,13 @@ span.bg-emerald-100, span.dark\:bg-emerald-950\/50 {
   box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15) !important;
 }
 
-span.bg-indigo-100, span.dark\:bg-indigo-950\/50 {
-  background: #e0f2fe !important;
-  color: #0369a1 !important;
+span.bg-teal-100, span.dark\:bg-teal-950\/50 {
+  background: #ccfbf1 !important;
+  color: #0f766e !important;
+  border: 1.5px solid #2dd4bf !important;
+  font-weight: 800 !important;
+  box-shadow: 0 2px 8px rgba(45, 212, 191, 0.15) !important;
+}
   border: 1.5px solid #38bdf8 !important;
   font-weight: 800 !important;
   box-shadow: 0 2px 8px rgba(14, 165, 233, 0.15) !important;
