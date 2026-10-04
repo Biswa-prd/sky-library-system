@@ -75,34 +75,32 @@ export const Navbar: React.FC<NavbarProps> = ({ user }) => {
       </div>
 
       {user && (
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center space-x-1 sm:space-x-2">
           {/* Notification Menu Container */}
           <div className="relative">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="relative p-2 text-slate-500 hover:text-teal-600 dark:text-slate-400 dark:hover:text-teal-400 bg-slate-100/70 hover:bg-teal-50/60 dark:bg-slate-800/60 dark:hover:bg-slate-800 border border-slate-200/60 dark:border-slate-700/60 rounded-xl transition-all shadow-2xs group"
+              className="relative w-9 h-9 flex items-center justify-center text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white rounded-full hover:bg-slate-100/80 dark:hover:bg-slate-800/80 transition-colors"
               title="Notifications"
             >
-              <Bell className="w-4 h-4 transition-transform group-hover:rotate-12" />
+              <Bell className="w-4 h-4" />
               {unreadCount > 0 && (
-                <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[18px] h-4 px-1 text-[10px] font-bold text-white bg-teal-600 rounded-full border-2 border-white dark:border-slate-900 shadow-2xs">
-                  {unreadCount > 9 ? '9+' : unreadCount}
-                </span>
+                <span className="absolute top-2 right-2 w-2 h-2 rounded-full bg-rose-500 ring-2 ring-white dark:ring-slate-900" />
               )}
             </button>
 
-            {/* Minimal Popover Dropdown */}
+            {/* Minimal Dropdown */}
             {isOpen && (
               <>
                 <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
-                <div className="absolute right-0 mt-2.5 w-80 sm:w-88 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200/80 dark:border-slate-800 shadow-xl z-50 overflow-hidden text-slate-900 dark:text-slate-100 animate-in fade-in slide-in-from-top-2">
-                  <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800/80 flex items-center justify-between bg-slate-50/50 dark:bg-slate-900/50">
+                <div className="absolute right-0 mt-2 w-80 rounded-2xl bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border border-slate-200/80 dark:border-slate-800 shadow-xl z-50 overflow-hidden text-slate-900 dark:text-slate-100 animate-in fade-in slide-in-from-top-1">
+                  <div className="px-4 py-3 border-b border-slate-100 dark:border-slate-800/80 flex items-center justify-between">
                     <div className="flex items-center space-x-2">
-                      <span className="font-bold text-xs uppercase tracking-wider text-slate-700 dark:text-slate-300">
+                      <span className="font-semibold text-xs text-slate-800 dark:text-slate-200">
                         Notifications
                       </span>
                       {unreadCount > 0 && (
-                        <span className="px-2 py-0.5 text-[10px] font-bold text-teal-700 bg-teal-50 dark:bg-teal-950/60 border border-teal-200/50 dark:border-teal-800/50 rounded-full">
+                        <span className="px-2 py-0.5 text-[10px] font-semibold text-teal-700 bg-teal-50 dark:bg-teal-950/60 rounded-full">
                           {unreadCount} unread
                         </span>
                       )}
@@ -110,36 +108,38 @@ export const Navbar: React.FC<NavbarProps> = ({ user }) => {
                     {unreadCount > 0 && (
                       <button
                         onClick={markAllRead}
-                        className="text-[11px] font-medium text-teal-600 hover:text-teal-700 dark:text-teal-400 hover:underline"
+                        className="text-[11px] font-medium text-teal-600 hover:text-teal-700 dark:text-teal-400 transition-colors"
                       >
                         Mark read
                       </button>
                     )}
                   </div>
 
-                  <div className="max-h-72 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800/60">
+                  <div className="max-h-64 overflow-y-auto divide-y divide-slate-100 dark:divide-slate-800/60">
                     {loading ? (
                       <div className="p-4 text-center text-xs text-slate-400">Loading notifications...</div>
                     ) : notifications.length === 0 ? (
-                      <div className="p-6 text-center text-xs text-slate-400">No notifications yet</div>
+                      <div className="p-6 text-center text-xs text-slate-400">No new notifications</div>
                     ) : (
                       notifications.slice(0, 5).map((n) => (
                         <div
                           key={n.id}
                           className={`p-3 text-xs transition-colors flex items-start space-x-2.5 ${
                             !n.isRead
-                              ? 'bg-teal-50/30 dark:bg-teal-950/20'
-                              : 'hover:bg-slate-50/70 dark:hover:bg-slate-800/40 opacity-75'
+                              ? 'bg-teal-50/20 dark:bg-teal-950/20'
+                              : 'hover:bg-slate-50/60 dark:hover:bg-slate-800/40 opacity-70'
                           }`}
                         >
                           <div
-                            className={`mt-1 h-2 w-2 rounded-full flex-shrink-0 ${
-                              !n.isRead ? 'bg-teal-500 ring-2 ring-teal-200 dark:ring-teal-900' : 'bg-slate-300 dark:bg-slate-700'
+                            className={`mt-1.5 h-1.5 w-1.5 rounded-full flex-shrink-0 ${
+                              !n.isRead ? 'bg-teal-500' : 'bg-transparent'
                             }`}
                           />
                           <div className="flex-1 min-w-0">
-                            <p className="font-semibold text-slate-900 dark:text-white truncate">{n.title}</p>
-                            <p className="text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-2">{n.message}</p>
+                            <p className="font-medium text-slate-900 dark:text-white truncate">{n.title}</p>
+                            <p className="text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-2 text-[11px] leading-relaxed">
+                              {n.message}
+                            </p>
                           </div>
                         </div>
                       ))
@@ -147,15 +147,15 @@ export const Navbar: React.FC<NavbarProps> = ({ user }) => {
                   </div>
 
                   {user.role === 'MEMBER' && (
-                    <div className="p-2 border-t border-slate-100 dark:border-slate-800/80 bg-slate-50/40 dark:bg-slate-900/40 text-center">
+                    <div className="p-2 border-t border-slate-100 dark:border-slate-800/80 bg-slate-50/50 dark:bg-slate-900/50 text-center">
                       <button
                         onClick={() => {
                           setIsOpen(false);
                           router.push('/member/notifications');
                         }}
-                        className="text-[11px] font-semibold text-slate-600 hover:text-teal-600 dark:text-slate-400 dark:hover:text-teal-400 transition-colors"
+                        className="text-[11px] font-medium text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors"
                       >
-                        View all notifications →
+                        View all
                       </button>
                     </div>
                   )}
@@ -164,30 +164,29 @@ export const Navbar: React.FC<NavbarProps> = ({ user }) => {
             )}
           </div>
 
-          {/* User Profile Card */}
-          <div className="flex items-center space-x-2.5 pl-3 border-l border-slate-200/70 dark:border-slate-800/80">
-            <div className="flex items-center space-x-2 bg-slate-50/80 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60 p-1 pr-3 rounded-xl">
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-teal-600 to-emerald-500 text-white flex items-center justify-center font-bold text-[11px] shadow-2xs">
+          {/* User Profile Info & Avatar */}
+          <div className="flex items-center space-x-2 pl-2">
+            <div className="flex items-center space-x-2.5">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-teal-500 to-emerald-500 text-white flex items-center justify-center font-bold text-xs shadow-xs ring-2 ring-teal-500/20">
                 {getInitials(user.name)}
               </div>
               <div className="hidden sm:flex flex-col items-start leading-tight">
-                <span className="text-xs font-bold text-slate-800 dark:text-white max-w-[110px] truncate">
+                <span className="text-xs font-semibold text-slate-900 dark:text-white max-w-[120px] truncate">
                   {user.name}
                 </span>
-                <Badge variant={user.role} className="text-[8px] py-0 px-1 mt-0.5 font-bold uppercase tracking-wider">
-                  {user.role}
-                </Badge>
+                <span className="text-[10px] text-slate-400 font-medium capitalize">
+                  {user.role.toLowerCase()}
+                </span>
               </div>
             </div>
 
-            {/* Logout Button */}
+            {/* Frameless Logout Button */}
             <button
               onClick={handleLogout}
-              className="p-2 sm:px-2.5 sm:py-1.5 text-xs font-semibold text-rose-600 hover:text-rose-700 bg-rose-50/60 hover:bg-rose-100/80 dark:bg-rose-950/40 dark:hover:bg-rose-900/50 border border-rose-200/60 dark:border-rose-800/50 rounded-xl transition-all shadow-2xs flex items-center space-x-1"
+              className="p-2 text-slate-400 hover:text-rose-600 hover:bg-rose-50/80 dark:hover:bg-rose-950/40 rounded-full transition-colors ml-1"
               title="Logout"
             >
-              <LogOut className="w-3.5 h-3.5" />
-              <span className="hidden md:inline">Logout</span>
+              <LogOut className="w-4 h-4" />
             </button>
           </div>
         </div>
