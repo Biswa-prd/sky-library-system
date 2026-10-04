@@ -7,7 +7,7 @@
 }
 
 body {
-  background: linear-gradient(135deg, #e6fffa 0%, #f0f9ff 35%, #fffbe6 70%, #f0fdf4 100%);
+  background: linear-gradient(135deg, #f0fdf4 0%, #f0f9ff 50%, #f8fafc 100%);
   background-attachment: fixed;
   color: #0f172a;
   min-height: 100vh;
@@ -20,43 +20,37 @@ a {
   text-decoration: none;
 }
 
-button, input, select {
+button {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+}
+
+input, select {
   font-family: inherit;
 }
 
-/* Bright Glassmorphism Cards & Panels */
-.bg-white, .bg-slate-900, .bg-slate-800 {
-  background: rgba(255, 255, 255, 0.94) !important;
+/* Glassmorphism Utility Classes */
+.glass-card {
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(13, 148, 136, 0.15) !important;
-  box-shadow: 0 12px 36px -6px rgba(13, 148, 136, 0.1), 0 4px 14px -2px rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid rgba(13, 148, 136, 0.15);
+  box-shadow: 0 12px 36px -6px rgba(13, 148, 136, 0.08), 0 4px 14px -2px rgba(0, 0, 0, 0.03);
   border-radius: 16px;
 }
 
-.dark\:bg-slate-900, .dark\:bg-slate-950, .dark\:bg-slate-800 {
-  background: rgba(255, 255, 255, 0.96) !important;
-  color: #0f172a !important;
-}
-
-.text-white, .dark\:text-white {
-  color: #0f172a !important;
-}
-
-.text-slate-300, .text-slate-400, .dark\:text-slate-300, .dark\:text-slate-400 {
-  color: #334155 !important;
-}
-
-.border-slate-800, .dark\:border-slate-800, .border-slate-700 {
-  border-color: #cbd5e1 !important;
-}
-
-/* Vibrant Academic Header Navbar */
 header {
-  background: rgba(255, 255, 255, 0.92) !important;
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(16px);
-  border-bottom: 2px solid rgba(13, 148, 136, 0.2) !important;
-  box-shadow: 0 4px 24px -2px rgba(13, 148, 136, 0.12) !important;
+  -webkit-backdrop-filter: blur(16px);
 }
 
 /* Sidebar Links with Bright Vibrant Highlights */
