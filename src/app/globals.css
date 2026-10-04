@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Vibrant & Bright Academic Library Design System */
 * {
   box-sizing: border-box;
