@@ -442,6 +442,76 @@
       "details": "{\"email\":\"student@library.local\"}",
       "createdAt": "2026-10-04T12:02:48.828Z",
       "updatedAt": "2026-10-04T12:02:48.829Z"
+    },
+    {
+      "id": "aud-1791160341836-owmx",
+      "userId": "user-stu-1",
+      "action": "USER_LOGOUT",
+      "entity": "User",
+      "entityId": "user-stu-1",
+      "details": null,
+      "createdAt": "2026-10-05T00:32:21.836Z",
+      "updatedAt": "2026-10-05T00:32:21.836Z"
+    },
+    {
+      "id": "aud-1791160341838-dwoa",
+      "userId": "user-stu-1",
+      "action": "USER_LOGOUT",
+      "entity": "User",
+      "entityId": "user-stu-1",
+      "details": null,
+      "createdAt": "2026-10-05T00:32:21.838Z",
+      "updatedAt": "2026-10-05T00:32:21.838Z"
+    },
+    {
+      "id": "aud-1791160341838-ug1y",
+      "userId": "user-stu-1",
+      "action": "USER_LOGOUT",
+      "entity": "User",
+      "entityId": "user-stu-1",
+      "details": null,
+      "createdAt": "2026-10-05T00:32:21.838Z",
+      "updatedAt": "2026-10-05T00:32:21.838Z"
+    },
+    {
+      "id": "aud-1791160341839-mo9j",
+      "userId": "user-stu-1",
+      "action": "USER_LOGOUT",
+      "entity": "User",
+      "entityId": "user-stu-1",
+      "details": null,
+      "createdAt": "2026-10-05T00:32:21.839Z",
+      "updatedAt": "2026-10-05T00:32:21.839Z"
+    },
+    {
+      "id": "aud-1791160349803-49n1",
+      "userId": "user-admin-1",
+      "action": "USER_LOGIN",
+      "entity": "User",
+      "entityId": "user-admin-1",
+      "details": "{\"email\":\"admin@library.local\"}",
+      "createdAt": "2026-10-05T00:32:29.803Z",
+      "updatedAt": "2026-10-05T00:32:29.803Z"
+    },
+    {
+      "id": "aud-1791162495018-mmuj",
+      "userId": "user-admin-1",
+      "action": "USER_LOGOUT",
+      "entity": "User",
+      "entityId": "user-admin-1",
+      "details": null,
+      "createdAt": "2026-10-05T01:08:15.018Z",
+      "updatedAt": "2026-10-05T01:08:15.018Z"
+    },
+    {
+      "id": "aud-1791162501977-rlqh",
+      "userId": "user-stu-1",
+      "action": "USER_LOGIN",
+      "entity": "User",
+      "entityId": "user-stu-1",
+      "details": "{\"email\":\"student@library.local\"}",
+      "createdAt": "2026-10-05T01:08:21.977Z",
+      "updatedAt": "2026-10-05T01:08:21.977Z"
     }
   ],
   "systemSettings": [

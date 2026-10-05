@@ -29,9 +29,9 @@ export default function MemberDashboardPage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col">
       <Navbar user={session} />
-      <div className="flex flex-1">
+      <div className="flex flex-1 min-w-0">
         <Sidebar role="MEMBER" />
-        <main className="flex-1 p-4 sm:p-6 space-y-6 max-w-7xl mx-auto w-full overflow-x-hidden">
+        <main className="flex-1 min-w-0 p-4 sm:p-6 space-y-6 max-w-7xl mx-auto w-full overflow-x-hidden">
           <div>
             <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">Member Portal</h1>
             <p className="text-xs sm:text-sm text-slate-500">Track your active loans, due dates, fines, and borrowing history.</p>

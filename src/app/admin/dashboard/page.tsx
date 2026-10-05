@@ -5,7 +5,7 @@ import { Navbar } from '@/components/layout/Navbar';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { Card } from '@/components/ui/Card';
 import { Badge } from '@/components/ui/Badge';
-import { BookOpen, Users, ArrowRightLeft, AlertTriangle, Receipt, History } from '@/components/ui/Icons';
+import { BookOpen, Users, ArrowRightLeft, Receipt, History } from '@/components/ui/Icons';
 import { formatCurrency, formatDate } from '@/lib/utils';
 import { DashboardStats, UserSession } from '@/types';
 
@@ -29,9 +29,9 @@ export default function AdminDashboardPage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col">
       <Navbar user={session} />
-      <div className="flex flex-1">
+      <div className="flex flex-1 min-w-0">
         <Sidebar role="ADMIN" />
-        <main className="flex-1 p-4 sm:p-6 space-y-6 max-w-7xl mx-auto w-full overflow-x-hidden">
+        <main className="flex-1 min-w-0 p-4 sm:p-6 space-y-6 max-w-7xl mx-auto w-full overflow-x-hidden">
           <div>
             <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">Admin Overview</h1>
             <p className="text-xs sm:text-sm text-slate-500">Real-time stats and circulation activity across the library branch.</p>
@@ -78,9 +78,9 @@ export default function AdminDashboardPage() {
             </Card>
           </div>
 
-          {/* Activity Tables Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* Recent Loans */}
+          {/* Activity Section - Independent Columns */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+            {/* Recent Book Issues Column */}
             <Card title="Recent Book Issues" icon={<ArrowRightLeft className="w-5 h-5" />}>
               <div className="overflow-x-auto mt-2">
                 <table className="w-full text-xs text-left">
@@ -110,7 +110,7 @@ export default function AdminDashboardPage() {
               </div>
             </Card>
 
-            {/* Audit Logs Preview */}
+            {/* Recent System Activity Column */}
             <Card title="Recent System Activity" icon={<History className="w-5 h-5" />}>
               <div className="space-y-3 mt-2">
                 {stats?.recentActivity?.map((log: any) => (

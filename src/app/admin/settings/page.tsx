@@ -64,9 +64,9 @@ export default function AdminSettingsPage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col">
       <Navbar user={session} />
-      <div className="flex flex-1">
+      <div className="flex flex-1 min-w-0">
         <Sidebar role="ADMIN" />
-        <main className="flex-1 p-6 space-y-6 max-w-4xl mx-auto w-full">
+        <main className="flex-1 min-w-0 p-4 sm:p-6 space-y-6 max-w-4xl mx-auto w-full overflow-x-hidden">
           <div>
             <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white">Policy Settings</h1>
             <p className="text-sm text-slate-500">Configure central borrowing limits, loan duration, and overdue fine rates.</p>

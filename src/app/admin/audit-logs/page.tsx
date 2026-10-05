@@ -69,9 +69,9 @@ export default function AdminAuditLogsPage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 flex flex-col">
       <Navbar user={session} />
-      <div className="flex flex-1">
+      <div className="flex flex-1 min-w-0">
         <Sidebar role="ADMIN" />
-        <main className="flex-1 p-6 space-y-6 max-w-7xl mx-auto w-full">
+        <main className="flex-1 min-w-0 p-4 sm:p-6 space-y-6 max-w-7xl mx-auto w-full overflow-x-hidden">
           <div>
             <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white">Audit Trail</h1>
             <p className="text-sm text-slate-500">Immutable event log of administrative actions and circulation transactions.</p>

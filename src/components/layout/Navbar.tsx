@@ -31,7 +31,7 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({ user }) => {
   const router = useRouter();
   const pathname = usePathname();
-  const { isMobileOpen, toggleMobile } = useSidebar();
+  const { isCollapsed, isMobileOpen, toggleSidebar } = useSidebar();
   const [unreadCount, setUnreadCount] = useState(0);
   const [notifications, setNotifications] = useState<any[]>([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -80,12 +80,18 @@ export const Navbar: React.FC<NavbarProps> = ({ user }) => {
   return (
     <header className="h-16 border-b border-slate-200/70 dark:border-slate-800/80 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl sticky top-0 z-40 px-3 sm:px-6 flex items-center justify-between shadow-xs">
       <div className="flex items-center space-x-2 sm:space-x-3">
-        {/* Mobile Drawer Hamburger Button */}
         {user && (
           <button
-            onClick={toggleMobile}
-            className="md:hidden p-2 text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-            aria-label="Toggle menu"
+            onClick={toggleSidebar}
+            className="p-2 text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500"
+            aria-label={
+              isMobileOpen
+                ? 'Close navigation menu'
+                : isCollapsed
+                ? 'Expand navigation'
+                : 'Collapse navigation'
+            }
+            aria-expanded={!isCollapsed || isMobileOpen}
           >
             {isMobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
